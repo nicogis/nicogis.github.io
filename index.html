@@ -1,9 +1,9 @@
 ---
-title: GitHub Portfolio Example
-description: A Demo of an Open Source Portfolio Using GitHub Pages
+title: nicogis
+description: my repositories
 ---
 <!doctype html>
-<html lang="en-GB">
+<html lang="it-IT">
   <head>
     <title>{{ page.title }}</title>
     <link href="./css/styles.css" media="all" rel="stylesheet">
@@ -18,7 +18,7 @@ description: A Demo of an Open Source Portfolio Using GitHub Pages
     </header>
 
     <ul class="portfolio">
-      {% for repo in site.github.public_repositories limit:28 %}
+      {% for repo in site.github.public_repositories limit:50 %}
         {% if repo.fork != true %}
           <li class="repo  repo--{{ repo.language | downcase }}">
             <svg class="icon">
