@@ -18,7 +18,7 @@ description: my repositories
     </header>
 
     <ul class="portfolio">
-      {% for repo in site.github.public_repositories limit:28 %}
+      {% for repo in site.github.public_repositories limit:32 %}
         {% if repo.fork != true %}
           <li class="repo  repo--{{ repo.language | downcase }}">
             <svg class="icon">
