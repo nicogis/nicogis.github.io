@@ -1,0 +1,31 @@
+name: PR site preview
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - name: Install GitHub Pages Jekyll dependencies
+        run: |
+          gem install github-pages -N
+      - name: Build preview
+        env:
+          JEKYLL_ENV: production
+        run: |
+          jekyll build --safe --destination _site --baseurl "" --url "https://github.nicogis.it"
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: _site/
+          retention-days: 7
