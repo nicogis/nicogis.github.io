@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { featuredProjects, focusAreas } from '../data/site';
+const github = 'https://github.com/nicogis';
+---
+<Layout title="NicoGIS — Geospatial Engineering & Open Source" description="Open source engineering across GIS, ArcGIS, .NET, AI and cloud.">
+  <header class="site-header container">
+    <a class="brand" href="/" aria-label="NicoGIS home"><span class="brand-icon">N</span><span>NICO<span class="accent">GIS</span></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#expertise">Expertise</a><a href="#projects">Projects</a><a href="#about">About</a>
+      <a class="nav-github" href={github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero container">
+      <div class="eyebrow"><span class="pulse"></span> ENGINEERING / GEOSPATIAL / OPEN SOURCE</div>
+      <h1>Building at the intersection of <span class="gradient-text">geospatial</span> and software.</h1>
+      <p class="hero-copy">Exploring GIS platforms, spatial algorithms, .NET engineering, cloud infrastructure and intelligent systems. Practical experiments. Real code. Open source.</p>
+      <div class="actions"><a class="button primary" href="#projects">Explore projects <span aria-hidden="true">↗</span></a><a class="button secondary" href={github} target="_blank" rel="noopener noreferrer">View GitHub profile</a></div>
+      <div class="hero-foot"><span>ARC<span class="accent">GIS</span></span><span>.NET / C#</span><span>AI & AGENTS</span><span>AZURE</span><span>TYPESCRIPT</span></div>
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+    </section>
+    <section class="section expertise-section" id="expertise"><div class="container">
+      <div class="section-heading"><div><p class="kicker">01 / AREAS OF FOCUS</p><h2>Engineering domains<span class="accent">.</span></h2></div><p>From spatial data to scalable platforms and applied AI.</p></div>
+      <div class="focus-grid">{focusAreas.map((area, i) => <article class="focus-card"><span class="card-index">0{i+1} /</span><span class="focus-symbol" aria-hidden="true">{area.symbol}</span><h3>{area.title}</h3><p>{area.description}</p><div class="tags">{area.tags.map(tag => <span>{tag}</span>)}</div></article>)}</div>
+    </div></section>
+    <section class="section projects-section" id="projects"><div class="container">
+      <div class="section-heading"><div><p class="kicker">02 / SELECTED WORK</p><h2>Open-source projects<span class="accent">.</span></h2></div><a class="inline-link" href={github} target="_blank" rel="noopener noreferrer">All repositories ↗</a></div>
+      <div class="project-grid">{featuredProjects.map((project, i) => <article class="project-card"><div class="project-top"><span class="project-number">PROJECT / 0{i+1}</span><span class="project-arrow" aria-hidden="true">↗</span></div><h3><a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a></h3><p>{project.description}</p><div class="project-bottom"><span class="project-category">{project.category}</span><a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name} on GitHub`}>SOURCE ↗</a></div></article>)}</div>
+      <p class="project-note">Featured projects are curated; browse GitHub for the complete, current repository list.</p>
+    </div></section>
+    <section class="section about-section" id="about"><div class="container about-grid"><div><p class="kicker">03 / ABOUT</p><h2>Curiosity meets <span class="gradient-text">implementation.</span></h2></div><div><p>NicoGIS is a space for hands-on software engineering: geospatial technology, architecture, developer tooling, experimentation and open-source knowledge sharing.</p><div class="actions"><a class="button secondary" href="https://nicogis.blogspot.com/" target="_blank" rel="noopener noreferrer">Read the technical blog ↗</a><a class="button secondary" href={github} target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a></div></div></div></section>
+  </main>
+  <footer class="footer container"><span>© {new Date().getFullYear()} NICO<span class="accent">GIS</span></span><span>Built with Astro · Open source mindset</span><a href="#top">Back to top ↑</a></footer>
+</Layout>
