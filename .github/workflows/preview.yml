@@ -1,0 +1,47 @@
+name: PR site preview
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - name: Install GitHub Pages Jekyll dependencies
+        run: |
+          gem install github-pages -N
+      - name: Build preview
+        env:
+          JEKYLL_ENV: production
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          jekyll build --safe --destination _site --baseurl ""
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: _site/
+          retention-days: 7
+
+      - name: Make stylesheet path relative for standalone preview
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          sed -i 's|href="/css/styles.css"|href="./css/styles.css"|g' _site/index.html
+          rm -f _site/CNAME
+      - name: Publish preview to isolated branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: preview
+          force_orphan: true
+          enable_jekyll: false

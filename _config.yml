@@ -1,6 +1,14 @@
-# Ignore repo files
+# GitHub Pages / Jekyll configuration
+title: "NicoGIS | Open Source Projects"
+description: "Open-source GIS, .NET, JavaScript and developer projects by NicoGIS."
+url: "https://github.nicogis.it"
+baseurl: ""
+
 exclude:
-- README.md
-- LICENSE
+  - README.md
+  - LICENSE
 
 theme: jekyll-theme-cayman
+
+plugins:
+  - jekyll-github-metadata
