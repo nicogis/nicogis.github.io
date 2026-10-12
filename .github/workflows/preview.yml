@@ -22,7 +22,7 @@ jobs:
         env:
           JEKYLL_ENV: production
         run: |
-          jekyll build --safe --destination _site --baseurl "" --url "https://github.nicogis.it"
+          jekyll build --safe --destination _site --baseurl ""
       - name: Upload preview artifact
         uses: actions/upload-artifact@v4
         with:
