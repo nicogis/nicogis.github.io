@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-preview:
@@ -30,3 +30,18 @@ jobs:
           name: site-preview
           path: _site/
           retention-days: 7
+
+      - name: Make stylesheet path relative for standalone preview
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          sed -i 's|href="/css/styles.css"|href="./css/styles.css"|g' _site/index.html
+          rm -f _site/CNAME
+      - name: Publish preview to isolated branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: preview
+          force_orphan: true
+          enable_jekyll: false
