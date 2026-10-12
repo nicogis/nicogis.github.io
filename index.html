@@ -29,7 +29,8 @@ description: "Open-source GIS, .NET, JavaScript and developer projects by NicoGI
   <main id="projects">
     <h2 class="section-title">Repositories</h2>
     <ul class="portfolio">
-      {% assign sorted_repos = site.github.public_repositories | sort: 'name' %}
+      {% assign repositories = site.github.public_repositories | default: '' | split: ',' %}
+      {% assign sorted_repos = repositories | sort: 'name' %}
       {% for repo in sorted_repos %}
         {% unless repo.fork or repo.private %}
           {% assign project_url = repo.homepage | default: repo.html_url %}
