@@ -178,3 +178,47 @@ h3 {
         margin-left: 16px;
     }
 }
+
+/* Accessibility and responsive refinements */
+:focus-visible {
+    outline: 3px solid #183153;
+    outline-offset: 3px;
+}
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    z-index: 10;
+    padding: 10px 14px;
+    background: #fff;
+    color: #183153;
+    &:focus { top: 12px; }
+}
+.tagline { font-size: 1.15rem; }
+.section-title {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 16px;
+    font-size: 1.5rem;
+}
+.repo {
+    min-width: 0;
+    padding-top: 52px;
+    overflow-wrap: anywhere;
+    h3 { display: block; line-height: 1.5; }
+    p { min-height: 3rem; }
+}
+.repo-actions { margin-top: 16px; }
+.footer {
+    padding: 34px 5%;
+    text-align: center;
+    a { color: #245fa7; }
+}
+@media (max-width: 600px) {
+    .header { min-height: 32vh; }
+    .repo { padding: 52px 22px 24px; }
+    .details { right: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
