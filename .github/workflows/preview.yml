@@ -21,6 +21,7 @@ jobs:
       - name: Build preview
         env:
           JEKYLL_ENV: production
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           jekyll build --safe --destination _site --baseurl ""
       - name: Upload preview artifact
